@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Travel.uz | O'zbekiston bo'ylab ziyorat va sayohat</title>
+  <link rel="icon" type="image/png" href="image/ikonka-rasm.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">
+        <h1>Travel.uz</h1>
+        <p>Ziyorat va sayohat maskanlari platformasi</p>
+      </div>
+      <div class="nav-links">
+        <a href="#manzillar">Manzillar</a>
+        <a href="#bron">Bron qilish</a>
+        <a href="#contact">Bog'lanish</a>
+        <a class="btn-link" href="admin.html">Admin panel</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="eyebrow">O'zbekistonning tarixiy va muqaddas maskanlari</span>
+        <h2>Travel.uz bilan yurtimiz bo'ylab ilhomli sayohatni boshlang</h2>
+        <p>
+          Buxoro, Samarqand, Termiz, Toshkent va Xivadagi mashhur ziyoratgohlarni bir joyda ko'ring,
+          bron qiling va o'zingizga mos sayohat rejasini tuzing.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#manzillar">Manzillarni ko'rish</a>
+          <a class="button button-secondary" href="#bron">Bron qilish</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <img
+          src="image/registan.jpg"
+          alt="Samarqanddagi tarixiy me'moriy obida"
+        >
+        <div class="hero-card-overlay">
+          <strong>Sayohatni oson boshqaring</strong>
+          <p>Admin panel orqali yangi manzillar qo'shiladi va asosiy sahifada avtomatik ko'rsatiladi.</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="section" id="manzillar">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Mashhur yo'nalishlar</h2>
+          </div>
+          <p>
+            Sayyohlar va ziyoratchilar uchun tanlangan eng muhim tarixiy maskanlar. Admin panelga qo'shilgan
+            yangi joylar ham shu yerda ko'rinadi.
+          </p>
+        </div>
+
+        <div class="destinations-grid" id="destinations"></div>
+      </div>
+    </section>
+
+    <section class="section" id="bron">
+      <div class="container panel-grid">
+        <div class="panel">
+          <h2>Bron qilish</h2>
+          <p>Quyidagi formani to'ldiring. Tugmani bosganingizda buyurtma qabul qilingani haqida xabar chiqadi.</p>
+
+          <form id="bookingForm">
+            <div class="form-row">
+              <label>
+                Ismingiz
+                <input type="text" id="fullName" placeholder="Masalan: Bolta Teshayivich" required>
+              </label>
+              <label>
+                Telefon raqamingiz
+                <input type="tel" id="phone" placeholder="+998 90 123 45 67" required>
+              </label>
+            </div>
+
+            <div class="form-row">
+              <label>
+                Sayohat sanasi
+                <input type="date" id="travelDate" required>
+              </label>
+              <label>
+                Manzilni tanlang
+                <select id="destinationSelect" required></select>
+              </label>
+            </div>
+
+            <label>
+              Qo'shimcha izoh
+              <textarea id="message" placeholder="Necha kishi borishi, maxsus istaklar va hokazo..."></textarea>
+            </label>
+
+            <button type="submit">So'rov yuborish</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h2>Nima uchun aynan Travel.uz?</h2>
+          <div class="booking-summary">
+            <div class="summary-item">
+              <strong>Ishonchli ma'lumot</strong>
+              Barcha asosiy maskanlar bir sahifada jamlangan va admin panel orqali oson yangilanadi.
+            </div>
+            <div class="summary-item">
+              <strong>Qulay bron</strong>
+              Sayohat sanasi va yo'nalishni tanlab tezkor so'rov yuborishingiz mumkin.
+            </div>
+            <div class="summary-item">
+              <strong>Mobilga mos dizayn</strong>
+              Sahifa telefon, planshet va kompyuterda chiroyli ko'rinishda ishlaydi.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2>Bog'lanish</h2>
+          </div>
+          <p>Travel.uz jamoasi bilan bog'lanib, ziyorat va sayohat xizmatlari bo'yicha qo'shimcha ma'lumot oling.</p>
+        </div>
+
+        <div class="contact-grid">
+          <div class="contact-card">
+            <h3>Email</h3>
+            <p>info@travel.uz</p>
+          </div>
+          <div class="contact-card">
+            <h3>Telefon</h3>
+            <p>+998 77 777 77 77</p>
+          </div>
+          <div class="contact-card">
+            <h3>Manzil</h3>
+            <p>Toshkent shahri, sayyohlik xizmatlari markazi</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">Travel.uz © 2026. O'zbekiston bo'ylab sayohat va ziyorat uchun qulay platforma.</div>
+  </footer>
+
+  <script>
+    const defaultData = [
+      {
+        name: "Imam Al-Bukhari",
+        city: "Buxoro",
+        description: "Buyuk muhaddis xotirasiga bag'ishlangan muqaddas maskan va ziyorat yo'nalishi.",
+        image: "image/imam-al-buxariy.jpg"
+      },
+      {
+        name: "At-Termizi",
+        city: "Termiz",
+        description: "At-Termiziy merosi bilan bog'liq tarixiy va ma'naviy ziyorat manzili.",
+        image: "image/at-termiziy.jpg"
+      },
+      {
+        name: "Islom Sivilizatsiyasi Markazi",
+        city: "Toshkent",
+        description: "Zamonaviy ilmiy-ma'rifiy markaz bo'lib, islom madaniyati va merosini yoritadi.",
+        image: "image/islom-sivilizatsiyasi.jpg"
+      },
+      {
+        name: "Registan",
+        city: "Samarqand",
+        description: "Sharq me'morchiligining eng mashhur timsollaridan biri bo'lgan tarixiy maydon.",
+        image: "image/registan.jpg"
+      },
+      {
+        name: "Ichan Qala",
+        city: "Xiva",
+        description: "Qadimiy devorlar bilan o'ralgan ochiq osmon ostidagi noyob tarixiy shaharcha.",
+        image: "image/ichan-qala.jpg"
+      }
+    ];
+
+    function ensurePlaces() {
+      const existingPlaces = JSON.parse(localStorage.getItem("places"));
+
+      if (!existingPlaces || !Array.isArray(existingPlaces)) {
+        localStorage.setItem("places", JSON.stringify(defaultData));
+        return defaultData;
+      }
+
+      const defaultNames = new Set(defaultData.map((item) => item.name));
+      const customPlaces = existingPlaces.filter((item) => !defaultNames.has(item.name));
+      const syncedPlaces = [...defaultData, ...customPlaces];
+
+      localStorage.setItem("places", JSON.stringify(syncedPlaces));
+      return syncedPlaces;
+    }
+
+    function createCard(item) {
+      return `
+        <article class="card">
+          <img src="${item.image}" alt="${item.name}" loading="lazy">
+          <div class="card-body">
+            <span class="card-location">${item.city}</span>
+            <h3>${item.name}</h3>
+            <p>${item.description}</p>
+          </div>
+        </article>
+      `;
+    }
+
+    function loadData() {
+      const data = ensurePlaces();
+      const container = document.getElementById("destinations");
+      const select = document.getElementById("destinationSelect");
+
+      container.innerHTML = "";
+      select.innerHTML = '<option value="">Manzilni tanlang</option>';
+
+      if (!data.length) {
+        container.innerHTML = '<div class="empty-state">Hozircha manzillar yo\'q. Admin panel orqali yangi joy qo\'shing.</div>';
+        return;
+      }
+
+      data.forEach((item) => {
+        container.innerHTML += createCard(item);
+        select.innerHTML += `<option value="${item.name}">${item.name} - ${item.city}</option>`;
+      });
+    }
+
+    function book(event) {
+      event.preventDefault();
+
+      const fullName = document.getElementById("fullName").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+      const travelDate = document.getElementById("travelDate").value;
+      const destination = document.getElementById("destinationSelect").value;
+
+      if (!fullName || !phone || !travelDate || !destination) {
+        alert("Iltimos, barcha majburiy maydonlarni to'ldiring.");
+        return;
+      }
+
+      alert(
+        `Rahmat, ${fullName}! ${destination} bo'yicha ${travelDate} sanasiga bron so'rovingiz qabul qilindi. Tez orada siz bilan bog'lanamiz.`
+      );
+
+      document.getElementById("bookingForm").reset();
+    }
+
+    document.getElementById("bookingForm").addEventListener("submit", book);
+    loadData();
+  </script>
+</body>
+</html>
