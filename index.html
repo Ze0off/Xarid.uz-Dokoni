@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xarid.uz</title>
+  <link rel="icon" href="images/ikonka.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <h1>🛒 Xarid.uz</h1>
+    <div class="header-btns">
+      <button onclick="openPanel('info')">📖 Kurs ishi</button>
+      <button onclick="openPanel('admin')">⚙️ Admin</button>
+      <button class="cart-btn" onclick="openPanel('cart')">
+        🧺 Savatcha <span id="cart-count">0</span>
+      </button>
+    </div>
+  </header>
+
+  <div id="overlay" onclick="closePanel()"></div>
+
+  <!-- KURS ISHI -->
+  <div id="panel-info" class="panel" style="display:none">
+    <div class="panel-top">
+      <h2>📖 Kurs ishi haqida</h2>
+      <button class="x-btn" onclick="closePanel()">✕</button>
+    </div>
+    <div class="panel-body">
+      <p><b>Mavzu:</b> Internet do'koni uchun savat va to'lov tizimini ishlab chiqish</p><br>
+      <p><b>Maqsad:</b> Foydalanuvchi mahsulotlarni ko'rib, savatga qo'shib, to'lov qilishi mumkin bo'lgan to'liq ishlaydigan internet do'koni yaratish.</p><br>
+      <p><b>Texnologiyalar:</b></p>
+      <ul>
+        <li>🔷 HTML5 — tuzilma</li>
+        <li>🎨 CSS3 — dizayn</li>
+        <li>⚡ JavaScript — mantiq</li>
+        <li>💾 localStorage — saqlash</li>
+      </ul><br>
+      <p><b>Funksiyalar:</b></p>
+      <ul>
+        <li>✅ Mahsulot savatga qo'shish va o'chirish</li>
+        <li>✅ Miqdorni + / − boshqarish</li>
+        <li>✅ Payme, Click, Karta to'lov</li>
+        <li>✅ SMS kod orqali tasdiqlash</li>
+        <li>✅ Admin panel — mahsulot qo'shish</li>
+      </ul><br>
+      <hr>
+      <p><b>Talaba:</b> _______________________</p>
+      <p><b>Guruh:</b> _______________________</p>
+      <p><b>Rahbar:</b> _______________________</p>
+      <p><b>Yil:</b> 2025</p>
+    </div>
+  </div>
+
+  <!-- ADMIN -->
+  <div id="panel-admin" class="panel" style="display:none">
+    <div class="panel-top">
+      <h2>⚙️ Admin Panel</h2>
+      <button class="x-btn" onclick="closePanel()">✕</button>
+    </div>
+    <div class="panel-body">
+      <p class="sub-title">Yangi mahsulot qo'shish</p>
+      <input id="a-name"  type="text"   placeholder="Mahsulot nomi *">
+      <input id="a-price" type="number" placeholder="Narxi (so'm) *">
+      <input id="a-image" type="text"   placeholder="Rasm: images/rasm.jpg">
+      <textarea id="a-desc" placeholder="Tavsif"></textarea>
+      <button class="green-btn" onclick="adminAdd()">➕ Qo'shish</button>
+      <p id="admin-msg" class="admin-msg"></p>
+      <h3 style="margin:20px 0 10px;font-size:.95em;color:#555">
+        Mahsulotlar: <span id="prod-count">0</span> ta
+      </h3>
+      <div id="admin-list"></div>
+    </div>
+  </div>
+
+  <!-- SAVATCHA -->
+  <div id="panel-cart" class="panel" style="display:none">
+    <div class="panel-top">
+      <h2>🧺 Savatcha</h2>
+      <button class="x-btn" onclick="closePanel()">✕</button>
+    </div>
+    <div class="panel-body">
+      <div id="cart-list"></div>
+      <div class="cart-total-row">
+        <span>Jami:</span>
+        <span id="cart-total" class="cart-total-sum">0 so'm</span>
+      </div>
+      <button class="pay-open-btn" onclick="openPayModal()">💳 To'lov qilish</button>
+    </div>
+  </div>
+
+  <!-- TO'LOV MODAL -->
+  <div id="modal-pay" style="display:none" class="modal-wrap">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h2>💳 To'lov</h2>
+        <button class="x-btn" onclick="closePayModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="pay-sum-box">Jami: <b id="pay-sum">0 so'm</b></div>
+
+        <p class="field-label">To'lov usulini tanlang:</p>
+        <div class="method-row">
+          <div class="method-box active" id="m-payme" onclick="selectMethod('payme')">
+            <div class="m-icon">🔵</div><div class="m-name">Payme</div>
+          </div>
+          <div class="method-box" id="m-click" onclick="selectMethod('click')">
+            <div class="m-icon">🟢</div><div class="m-name">Click</div>
+          </div>
+          <div class="method-box" id="m-card" onclick="selectMethod('card')">
+            <div class="m-icon">💳</div><div class="m-name">Karta</div>
+          </div>
+        </div>
+
+        <div id="card-section" style="display:none">
+          <p class="field-label">Karta raqami:</p>
+          <input id="card-num" type="text" maxlength="19" placeholder="0000 0000 0000 0000" oninput="fmtCard(this)">
+          <div class="two-col">
+            <div>
+              <p class="field-label">Amal qilish muddati:</p>
+              <input id="card-exp" type="text" maxlength="5" placeholder="MM/YY" oninput="fmtExp(this)">
+            </div>
+            <div>
+              <p class="field-label">CVV:</p>
+              <input id="card-cvv" type="password" maxlength="3" placeholder="•••">
+            </div>
+          </div>
+        </div>
+
+        <p class="field-label">Telefon raqam:</p>
+        <div class="phone-row">
+          <span class="phone-prefix">+998</span>
+          <input id="phone-num" type="text" maxlength="9" placeholder="90 123 45 67" oninput="fmtPhone(this)">
+        </div>
+
+        <p class="field-label">SMS tasdiqlash kodi:</p>
+        <div class="sms-row">
+          <input id="sms-code" type="text" maxlength="6" placeholder="6 xonali kod">
+          <button class="sms-btn" onclick="sendSMS()">Kod olish</button>
+        </div>
+        <p id="sms-hint" class="sms-hint"></p>
+
+        <button class="confirm-btn" onclick="confirmPay()">✅ To'lovni tasdiqlash</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUVAFFAQIYAT -->
+  <div id="modal-success" style="display:none" class="modal-wrap">
+    <div class="modal-card success-card">
+      <div class="success-icon">🎉</div>
+      <h2>To'lov amalga oshdi!</h2>
+      <p id="success-info"></p>
+      <button class="confirm-btn" style="margin-top:16px" onclick="closeSuccess()">Yopish</button>
+    </div>
+  </div>
+
+  <main>
+    <div class="page-title"><h2>🛍️ Mahsulotlar</h2></div>
+    <section class="products" id="products-grid"></section>
+  </main>
+
+  <div id="toast" class="toast" style="display:none"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
